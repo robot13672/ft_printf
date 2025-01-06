@@ -12,14 +12,14 @@
 
 #include "ft_printf.h"
 
-static int get_length(int n)
+static int	get_length(int n)
 {
 	int	count;
 
 	count = 0;
-	if(n < 9 && n >= 0)
-		return (0);
-	if(n < 0)
+	if (n < 9 && n >= 0)
+		return (1);
+	if (n < 0)
 	{
 		n *= -1;
 		count++;
@@ -32,25 +32,25 @@ static int get_length(int n)
 	return (count);
 }
 
-void write_nbr(int nbr)
+void	write_nbr(int nbr)
 {
 	nbr += 48;
 	write(1, &nbr, 1);
 }
 
-int put_nbr(int nbr)
+void	put_nbr(int nbr)
 {
 	if (nbr == -2147483648)
 	{
 		write (1, "-2147483648", 11);
 		return ;
 	}
-	if(nbr < 0)
+	if (nbr < 0)
 	{
 		nbr *= -1;
-		write(1, '-', 1);
+		write(1, "-", 1);
 	}
-	if(nbr >= 10)
+	if (nbr >= 10)
 	{
 		put_nbr(nbr / 10);
 		write_nbr(nbr % 10);
@@ -59,8 +59,8 @@ int put_nbr(int nbr)
 		write_nbr(nbr);
 }
 
-int print_nbr(nbr)
+int	print_nbr(int nbr)
 {
 	put_nbr(nbr);
-	return (get_length);
+	return (get_length(nbr));
 }

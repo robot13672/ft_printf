@@ -12,10 +12,10 @@
 
 #include "ft_printf.h"
 
-static int write_pointer(char *hex, int j, unsigned long long int dec)
+static int	write_pointer(char *hex, int j, unsigned long long int dec)
 {
 	char	tmp;
-	int 	i;
+	int		i;
 	char	hex_string[100];
 
 	i = 0;
@@ -24,8 +24,8 @@ static int write_pointer(char *hex, int j, unsigned long long int dec)
 		hex_string[i++] = hex[dec % 16];
 		dec /= 16;
 	}
-	hex[i--] = '\0';
-	while(i > j)
+	hex_string[i--] = '\0';
+	while (i > j)
 	{
 		tmp = hex_string[i];
 		hex_string[i] = hex_string[j];
@@ -34,15 +34,15 @@ static int write_pointer(char *hex, int j, unsigned long long int dec)
 		j++;
 	}
 	j = 0;
-	while(hex_string[j])
+	while (hex_string[j])
 		write(1, &hex_string[j++], 1);
 	return (j);
 }
 
-int print_pointer(unsigned long long int dec)
+int	print_pointer(unsigned long long int dec)
 {
 	int		i;
-	char 	*heximal;
+	char	*heximal;
 
 	heximal = "0123456789abcdef";
 	i = 0;

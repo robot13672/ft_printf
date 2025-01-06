@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-static int get_lenght(unsigned int num)
+static int	get_lenght(unsigned int num)
 {
 	int	count;
 
 	count = 0;
-	if(num == 0)
+	if (num == 0)
 		return (1);
 	while (num != 0)
 	{
@@ -27,24 +27,24 @@ static int get_lenght(unsigned int num)
 	return (count);
 }
 
-static void write_num(int n)
+static void	write_num(int n)
 {
 	n += 48;
 	write(1, &n, 1);
 }
 
-static void put_unsigned(int n)
+static void	put_unsigned(unsigned int n)
 {
-	if(n >= 10)
+	if (n >= 10)
 	{
-		put_unsigned(n % 10);
+		put_unsigned(n / 10);
 		write_num(n % 10);
 	}
 	else
 		write_num(n);
 }
 
-int print_unsigned(unsigned int n)
+int	print_unsigned(unsigned int n)
 {
 	put_unsigned(n);
 	return (get_lenght(n));

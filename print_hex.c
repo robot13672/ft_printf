@@ -12,19 +12,20 @@
 
 #include "ft_printf.h"
 
-static int hex_convert(int j, const char *hex, unsigned int dec)
+static int	hex_convert(int j, const char *hex, unsigned int dec)
 {
 	char	hex_string[100];
 	char	tmp;
 	int		i;
 
 	i = 0;
-	while(dec > 0)
+	while (dec > 0)
 	{
 		hex_string[i++] = hex[dec % 16];
 		dec /= 16;
 	}
-	while(i > j)
+	hex_string[i--] = '\0';
+	while (i > j)
 	{
 		tmp = hex_string[i];
 		hex_string[i] = hex_string[j];
@@ -38,7 +39,7 @@ static int hex_convert(int j, const char *hex, unsigned int dec)
 	return (j);
 }
 
-static int hex_upper(unsigned int dec)
+static int	hex_upper(unsigned int dec)
 {
 	char	*hex;
 	int		i;
@@ -48,7 +49,7 @@ static int hex_upper(unsigned int dec)
 	return (hex_convert(i, hex, dec));
 }
 
-static int hex_lower(unsigned int dec)
+static int	hex_lower(unsigned int dec)
 {
 	char	*hex;
 	int		i;
@@ -58,11 +59,11 @@ static int hex_lower(unsigned int dec)
 	return (hex_convert(i, hex, dec));
 }
 
-int print_hex(const char *str, unsigned int arg, int i)
+int	print_hex(const char *str, unsigned int arg, int i)
 {
-	if(arg == 0)
+	if (arg == 0)
 	{
-		write(1, '0', 1);
+		write(1, "0", 1);
 		return (1);
 	}
 	if (str[i] == 'X')
